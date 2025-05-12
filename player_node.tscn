@@ -1,0 +1,208 @@
+[gd_scene load_steps=27 format=3 uid="uid://bwxq0ygw1mg3v"]
+
+[ext_resource type="Script" uid="uid://dscextfwudnxt" path="res://player_node.gd" id="1_8bb3i"]
+[ext_resource type="PackedScene" uid="uid://pcjhskgqq6rt" path="res://projectile_launcher.tscn" id="2_8bb3i"]
+[ext_resource type="Script" uid="uid://d3168jd812nnb" path="res://player2.gd" id="2_sk4s1"]
+[ext_resource type="Texture2D" uid="uid://x7686nfatbtf" path="res://assets/crosshair001.png" id="3_sk4s1"]
+[ext_resource type="PackedScene" uid="uid://bq3g783sfkmf1" path="res://longbow.tscn" id="4_uvr8e"]
+[ext_resource type="Script" uid="uid://7oppegrt15nx" path="res://Interaction/player_interaction_handler.gd" id="6_p3v36"]
+[ext_resource type="Script" uid="uid://ck1jy06ukfgry" path="res://power_ui.gd" id="6_sk4s1"]
+[ext_resource type="Script" uid="uid://cbyfkyt7uak3v" path="res://Interaction/Inventory/item_data.gd" id="7_pmd0d"]
+[ext_resource type="Texture2D" uid="uid://dyghpqpn6vou3" path="res://assets/Horace Drowned.jpg" id="8_nhovj"]
+[ext_resource type="PackedScene" uid="uid://co0p5yvrmle5" path="res://Interaction/Inventory/item_test_cube.tscn" id="8_pmd0d"]
+[ext_resource type="Texture2D" uid="uid://b23jly7haa485" path="res://assets/hide.png" id="10_2onws"]
+[ext_resource type="Script" uid="uid://cvmub0m5vorrw" path="res://Interaction/Inventory/inventory_handler.gd" id="11_8a5kl"]
+[ext_resource type="PackedScene" uid="uid://d72ory4fxnpq" path="res://HarvestResources/animal_hide.tscn" id="11_f2prp"]
+[ext_resource type="Texture2D" uid="uid://c3etndbhr0joj" path="res://assets/meat.png" id="12_yxtgn"]
+[ext_resource type="PackedScene" uid="uid://qc6llb8yws8j" path="res://HarvestResources/animal_meat.tscn" id="13_fhsed"]
+[ext_resource type="Texture2D" uid="uid://d1qj4ufgdypyq" path="res://assets/cookedMeat.png" id="14_yxtgn"]
+[ext_resource type="PackedScene" uid="uid://bqu8052ld63t2" path="res://cooked_meat.tscn" id="15_fhsed"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_804b1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2onws"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sk4s1"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Resource" id="Resource_nhovj"]
+script = ExtResource("7_pmd0d")
+ItemName = "TestCube"
+Icon = ExtResource("8_nhovj")
+buyPrice = 10
+sellPrice = 10
+ItemModelPrefab = ExtResource("8_pmd0d")
+metadata/_custom_type_script = "uid://cbyfkyt7uak3v"
+
+[sub_resource type="Resource" id="Resource_4dphs"]
+script = ExtResource("7_pmd0d")
+ItemName = "Hide"
+Icon = ExtResource("10_2onws")
+buyPrice = 20
+sellPrice = 20
+ItemModelPrefab = ExtResource("11_f2prp")
+metadata/_custom_type_script = "uid://cbyfkyt7uak3v"
+
+[sub_resource type="Resource" id="Resource_0mkga"]
+script = ExtResource("7_pmd0d")
+ItemName = "Meat"
+Icon = ExtResource("12_yxtgn")
+buyPrice = 15
+sellPrice = 15
+ItemModelPrefab = ExtResource("13_fhsed")
+metadata/_custom_type_script = "uid://cbyfkyt7uak3v"
+
+[sub_resource type="Resource" id="Resource_5cvfe"]
+script = ExtResource("7_pmd0d")
+ItemName = "CookedMeat"
+Icon = ExtResource("14_yxtgn")
+buyPrice = 30
+sellPrice = 30
+ItemModelPrefab = ExtResource("15_fhsed")
+metadata/_custom_type_script = "uid://cbyfkyt7uak3v"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8a5kl"]
+radius = 2.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmd0d"]
+bg_color = Color(0.636171, 0.615641, 0.291378, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="PlayerNode" type="Node3D"]
+script = ExtResource("1_8bb3i")
+
+[node name="Player" type="RigidBody3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+lock_rotation = true
+linear_damp = 1.7
+script = ExtResource("2_sk4s1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_804b1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_2onws")
+
+[node name="TwistPivot" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PitchPivot" type="Node3D" parent="Player/TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/TwistPivot/PitchPivot"]
+
+[node name="Weapon" type="MeshInstance3D" parent="Player/TwistPivot/PitchPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, -0.5)
+mesh = SubResource("SphereMesh_sk4s1")
+
+[node name="ProjectileLauncher" parent="Player/TwistPivot/PitchPivot/Camera3D" instance=ExtResource("2_8bb3i")]
+
+[node name="Crosshair" type="CanvasLayer" parent="Player/TwistPivot/PitchPivot/Camera3D"]
+
+[node name="cross" type="TextureRect" parent="Player/TwistPivot/PitchPivot/Camera3D/Crosshair"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_sk4s1")
+
+[node name="Longbow" parent="Player/TwistPivot/PitchPivot/Camera3D" instance=ExtResource("4_uvr8e")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.501186, -0.392336, -0.951666)
+
+[node name="InteractionArea" type="Area3D" parent="Player"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_p3v36")
+ItemTypes = Array[ExtResource("7_pmd0d")]([SubResource("Resource_nhovj"), SubResource("Resource_4dphs"), SubResource("Resource_0mkga"), SubResource("Resource_5cvfe")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/InteractionArea"]
+shape = SubResource("SphereShape3D_8a5kl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PowerUI" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.8
+script = ExtResource("6_sk4s1")
+
+[node name="Money" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(100, 30)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -46.0
+offset_right = 123.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+
+[node name="InventoryUI" type="Control" parent="." node_paths=PackedStringArray("PlayerBody", "InventoryGrid", "area")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_8a5kl")
+PlayerBody = NodePath("../Player")
+CollisionMask = 1
+InventoryGrid = NodePath("Panel/MarginContainer/GridContainer")
+area = NodePath("../Player/InteractionArea")
+
+[node name="Panel" type="Panel" parent="InventoryUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -360.0
+offset_right = 414.0
+offset_bottom = -75.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmd0d")
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryUI/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="InventoryUI/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 5
+
+[connection signal="camera_shake" from="Player/TwistPivot/PitchPivot/Camera3D/ProjectileLauncher" to="Player" method="_on_projectile_launcher_camera_shake"]
+[connection signal="power_changed" from="Player/TwistPivot/PitchPivot/Camera3D/ProjectileLauncher" to="CanvasLayer/PowerUI" method="_on_projectile_launcher_power_changed"]
+[connection signal="OnItemPickedUp" from="Player/InteractionArea" to="InventoryUI" method="PickupItem"]
+[connection signal="body_entered" from="Player/InteractionArea" to="Player/InteractionArea" method="OnObjectEnteredArea"]
+[connection signal="body_exited" from="Player/InteractionArea" to="Player/InteractionArea" method="onObjectExitedArea"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://doypwbwk7vbm0"]
+
+[ext_resource type="Script" uid="uid://c8yhmbsoq5js6" path="res://shop_area.gd" id="1_viryw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e7rdd"]
+size = Vector3(3, 2, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_blqjs"]
+points = PackedVector3Array(1.5, 1, 0.5, 1.5, 1, -0.5, -1.5, 1, 0.5, 1.5, -1, 0.5, 1.5, -1, -0.5, -1.5, 1, -0.5, -1.5, -1, 0.5, -1.5, -1, -0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fgaav"]
+radius = 3.0
+
+[node name="Shop" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_e7rdd")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_blqjs")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_viryw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_fgaav")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32172, 0)
+billboard = 1
+no_depth_test = true
+text = "SHOP
+"
+font_size = 100
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="on_body_exited"]

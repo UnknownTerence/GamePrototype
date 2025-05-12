@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://pcjhskgqq6rt"]
+
+[ext_resource type="Script" uid="uid://363b70gk7siu" path="res://projectile_launcher.gd" id="1_vfsl6"]
+
+[node name="ProjectileLauncher" type="Node3D"]
+script = ExtResource("1_vfsl6")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DrawTime" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="DrawTime" to="." method="_fire_arrow"]

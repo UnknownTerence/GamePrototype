@@ -1,0 +1,81 @@
+[gd_scene load_steps=14 format=3 uid="uid://pq8vq8jh1uiy"]
+
+[ext_resource type="Script" uid="uid://boixif5omjlxa" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cw4gbkqon6qx0" path="res://moving_wall.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bwxq0ygw1mg3v" path="res://player_node.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://co0p5yvrmle5" path="res://Interaction/Inventory/item_test_cube.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://doypwbwk7vbm0" path="res://shop.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://d72ory4fxnpq" path="res://HarvestResources/animal_hide.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://qc6llb8yws8j" path="res://HarvestResources/animal_meat.tscn" id="9_4c57u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7dm0k"]
+size = Vector2(200, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.119251, 0.196937, 0.0993136, 1)
+metallic = 0.08
+metallic_specular = 0.17
+roughness = 0.55
+emission_energy_multiplier = 2.25
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1bvp3"]
+points = PackedVector3Array(-100, 0, -100, -100, 0, 100, 100, 0, -100, 100, 0, 100)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_lquwl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_7dm0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_h2yge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_1bvp3")
+
+[node name="MovingWall" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9004, 1.93325, -47.7265)
+
+[node name="PlayerNode" parent="." instance=ExtResource("4_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.548755, 1.57221, -2.2971)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="ItemTestCube" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666964, 1.52393, -8.08236)
+
+[node name="Shop" parent="." instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4024, -9.53674e-07, -7.59829)
+
+[node name="AnimalHide" parent="." instance=ExtResource("8_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.37276, 0.153868, -7.55679)
+
+[node name="AnimalMeat" parent="." instance=ExtResource("9_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.03677, 0.153868, -5.98222)
+
+[connection signal="interact" from="PlayerNode" to="MovingWall" method="_on_player_interact"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

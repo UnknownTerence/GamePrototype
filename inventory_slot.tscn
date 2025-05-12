@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://s2dlkwixl4hi"]
+
+[ext_resource type="Script" uid="uid://dijhhoq587p6w" path="res://Interaction/Inventory/inventory_slot.gd" id="1_42eed"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy1q7"]
+bg_color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42eed"]
+bg_color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5bh6"]
+
+[node name="InventorySlot" type="Button" node_paths=PackedStringArray("IconSlot")]
+custom_minimum_size = Vector2(64, 64)
+theme_override_styles/hover = SubResource("StyleBoxFlat_jy1q7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42eed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_f5bh6")
+script = ExtResource("1_42eed")
+IconSlot = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[connection signal="mouse_entered" from="." to="." method="onHover"]
+[connection signal="mouse_exited" from="." to="." method="offHover"]
+[connection signal="pressed" from="." to="." method="onPressed"]

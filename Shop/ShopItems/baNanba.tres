@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=3 format=3 uid="uid://x83g21lrc7v2"]
+
+[ext_resource type="Texture2D" uid="uid://cfxta6vibgj5v" path="res://assets/bananba (2).png" id="1_tlkfj"]
+[ext_resource type="Script" uid="uid://b6gdvg44qh7v8" path="res://Shop/shop_item.gd" id="2_od5lf"]
+
+[resource]
+script = ExtResource("2_od5lf")
+ItemName = "Bananba"
+Icon = ExtResource("1_tlkfj")
+Price = 10
+metadata/_custom_type_script = "uid://b6gdvg44qh7v8"

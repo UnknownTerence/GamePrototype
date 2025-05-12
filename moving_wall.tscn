@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw4gbkqon6qx0"]
+
+[ext_resource type="Script" uid="uid://b1a4gg8e0fii4" path="res://moving_wall.gd" id="1_abir0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_abir0"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_abir0"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bsjy6"]
+radius = 2.5
+
+[node name="MovingWall" type="RigidBody3D" groups=["animal"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_abir0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_abir0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_abir0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="HarvestPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+no_depth_test = true
+
+[node name="HarvestArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HarvestArea"]
+shape = SubResource("SphereShape3D_bsjy6")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="body_entered" from="HarvestArea" to="." method="_on_harvest_area_body_entered"]
+[connection signal="body_exited" from="HarvestArea" to="." method="_on_harvest_area_body_exited"]

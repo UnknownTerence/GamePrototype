@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://rpg1ern01t2o"]
+
+[ext_resource type="Texture2D" uid="uid://dyghpqpn6vou3" path="res://assets/Horace Drowned.jpg" id="1_gsfia"]
+
+[resource]
+albedo_texture = ExtResource("1_gsfia")

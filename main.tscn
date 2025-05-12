@@ -1,0 +1,128 @@
+[gd_scene load_steps=19 format=3 uid="uid://pq8vq8jh1uiy"]
+
+[ext_resource type="Script" uid="uid://boixif5omjlxa" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cw4gbkqon6qx0" path="res://moving_wall.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bwxq0ygw1mg3v" path="res://player_node.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://co0p5yvrmle5" path="res://Interaction/Inventory/item_test_cube.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://doypwbwk7vbm0" path="res://shop.tscn" id="7_272bh"]
+[ext_resource type="Script" uid="uid://ctuy47q4a8w46" path="res://terrain_generation.gd" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://d72ory4fxnpq" path="res://HarvestResources/animal_hide.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://qc6llb8yws8j" path="res://HarvestResources/animal_meat.tscn" id="9_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bqu8052ld63t2" path="res://cooked_meat.tscn" id="9_kek77"]
+
+[sub_resource type="Gradient" id="Gradient_5vw27"]
+colors = PackedColorArray(0.00702761, 0.087321, 0.246197, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kek77"]
+gradient = SubResource("Gradient_5vw27")
+fill_from = Vector2(1, 0.551282)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4c57u"]
+night_sky = SubResource("GradientTexture2D_kek77")
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("PhysicalSkyMaterial_4c57u")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_dg77c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_efxa6"]
+resource_name = "dayNightCycle"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycdy4"]
+_data = {
+&"RESET": SubResource("Animation_dg77c"),
+&"dayNightCycle": SubResource("Animation_efxa6")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5vw27"]
+noise_type = 0
+frequency = 0.003
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_lquwl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ycdy4")
+}
+autoplay = "dayNightCycle"
+
+[node name="MovingWall" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9004, 1.93325, -47.7265)
+
+[node name="PlayerNode" parent="." instance=ExtResource("4_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.548755, 5.86713, -2.2971)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="ItemTestCube" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666964, 6.27841, -8.08236)
+
+[node name="Shop" parent="." instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9069, 0.780156, -7.59829)
+
+[node name="AnimalHide" parent="." instance=ExtResource("8_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.37276, 6.24108, -7.55679)
+
+[node name="AnimalMeat" parent="." instance=ExtResource("9_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.03677, 5.76057, -5.98222)
+
+[node name="AnimalMeat2" parent="." instance=ExtResource("9_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47331, 5.76057, -5.98222)
+
+[node name="AnimalMeat3" parent="." instance=ExtResource("9_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45827, 5.76057, -5.98222)
+
+[node name="AnimalMeat4" parent="." instance=ExtResource("9_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.63257, 5.76057, -5.98222)
+
+[node name="TerrainGeneration" type="Node" parent="."]
+script = ExtResource("8_5vw27")
+noise = SubResource("FastNoiseLite_5vw27")
+
+[node name="CookedMeat" parent="." instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.113192, 6.26901, -5.65033)
+
+[connection signal="interact" from="PlayerNode" to="MovingWall" method="_on_player_interact"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

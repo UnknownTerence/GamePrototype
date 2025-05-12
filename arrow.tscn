@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwmv1xifc6py2"]
+
+[ext_resource type="PackedScene" uid="uid://cdr5u4aa711s7" path="res://assets/Arrow.fbx" id="1_2ndhl"]
+[ext_resource type="Texture2D" uid="uid://cxwxsfvosbukp" path="res://assets/materials/Texture.png" id="2_acd0x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6a6ax"]
+albedo_texture = ExtResource("2_acd0x")
+
+[node name="Arrow" instance=ExtResource("1_2ndhl")]
+
+[node name="Arrow" parent="." index="0"]
+transform = Transform3D(4.37114e-06, -100, -8.74228e-06, -100, -4.37114e-06, 0, -3.82137e-13, 8.74228e-06, -100, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_6a6ax")

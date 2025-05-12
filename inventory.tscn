@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://c1bpdgh53ycr6"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Background" type="PanelContainer" parent="MainMargin"]
+layout_mode = 2
+
+[node name="ContentMargin" type="MarginContainer" parent="MainMargin/Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Content" type="VBoxContainer" parent="MainMargin/Background/ContentMargin"]
+layout_mode = 2
+
+[node name="HeaderContainer" type="CenterContainer" parent="MainMargin/Background/ContentMargin/Content"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="MainMargin/Background/ContentMargin/Content/HeaderContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 109
+text = "Hello"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/Background/ContentMargin/Content"]
+layout_mode = 2
+
+[node name="Col1Container" type="MarginContainer" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="Col1" type="VBoxContainer" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container/Col1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 1"
+
+[node name="Label2" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container/Col1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 2"
+
+[node name="Label3" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container/Col1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 3"
+
+[node name="Label4" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container/Col1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 1"
+
+[node name="Label5" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container/Col1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 2"
+
+[node name="Label6" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col1Container/Col1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 3"
+
+[node name="Col2Container" type="MarginContainer" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="Col2" type="VBoxContainer" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container/Col2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 1"
+
+[node name="Label2" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container/Col2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 2"
+
+[node name="Label3" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container/Col2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 3"
+
+[node name="Label4" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container/Col2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 1"
+
+[node name="Label5" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container/Col2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 2"
+
+[node name="Label6" type="Label" parent="MainMargin/Background/ContentMargin/Content/HBoxContainer/Col2Container/Col2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "text 3"
